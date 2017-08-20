@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Front End Test Project</title>
+</head>
+<body>
+    <header>
+        <h1>Front End Test Project</h1>
+        <span>by: Kseniya Mikhel</span>
+        <hr>
+    </header>
+
+    <div class="appData"></div>
+
+    <script src="components/RequestButton.js"></script>
+    <script src="components/DataProvider.js"></script>
+    <script src="components/ColumnsSelector.js"></script>
+    <script src="components/DataTable.js"></script>
+    <script src="components/App.js"></script>
+    <script>
+        let app = new App({el:document.querySelector('.appData')});
+        app.renderRequestButton();
+    </script>
+</body>
+</html>
