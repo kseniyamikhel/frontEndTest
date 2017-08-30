@@ -2,17 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Front End Test Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
     <header>
         <h1>Front End Test Project</h1>
-        <span>by: Kseniya Mikhel</span>
+        <span class="author">by: Kseniya Mikhel</span>
         <hr>
     </header>
 
     <div class="appData"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+    <script id="data-table-template" type="x-tmpl-mustache">
+        <div class='headingWrap'>
+            <button id="backButton"><img src="img/arrow_back.png" />   SELECT DATA</button>
+            <h3 class='heading'>Here is the data that you have requested:</h3>
+        </div>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    {{#columns}}
+                        <th>{{.}}</th>
+                    {{/columns}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#rows}}
+                    <tr>
+                        {{#cells}}
+                            <td>{{.}}</td>
+                        {{/cells}}
+                    </tr>
+                {{/rows}}
+            </tbody>
+        </table>
+    </script>
+
+    <script src="components/Loader.js"></script>
     <script src="components/RequestButton.js"></script>
     <script src="components/DataProvider.js"></script>
     <script src="components/ColumnsSelector.js"></script>

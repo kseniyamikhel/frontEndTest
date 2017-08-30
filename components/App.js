@@ -1,39 +1,36 @@
 class App {
-    constructor({el}){
-        this.el = el;
-        this.requestButton = new RequestButton({el: this.el});
-        this.dataProvider = new DataProvider({path: 'http://www.json-generator.com/api/json/get/bUsRkvEmHm?indent=2'});
-        this.columnsSelector = new ColumnsSelector({el: this.el});
-        this.dataTable = new DataTable({el: this.el});
-        this.requestButton.setOnClickHandler(this._renderColumnsSelectors);
-        this.dataTable.setOnBackHandler(this._renderColumnsSelectors);
-        this.columnsSelector.setOnSelectHandler(this._renderTable);
-    }
-    renderRequestButton(){
-        this.requestButton.render();
-    }
-    _renderColumnsSelectors(e){
-        e.preventDefault();
-        let columns = this.dataProvider.getColumns();
-        this.columnsSelector.render(columns);
-    }
-    _renderTable(chosenColumns, e){
-        e.preventDefault();
-        let data = this.dataProvider.getData();
-        this.dataTable.render(chosenColumns, data);
-    }
-    /*_initComponents(){
-        requestButton.render();
-        requestButton.onClick = () => {
-            dataProvider.makeRequest((data => {
-                columnsSelector.getOptions(data);
-                columnsSelector.render();
-            }));
-        };
-        columnsSelector.onSubmit = (chosenOptions) => {
-            console.log('onSubmitRender', chosenOptions);
-            dataTable.render(chosenOptions);
-        };
-    }*/
+  constructor({el}) {
+    this.el = el;
+    this.requestButton = new RequestButton({el: this.el});
+    this.dataProvider = new DataProvider({path: 'http://www.json-generator.com/api/json/get/bUsRkvEmHm?indent=2'});
+    this.columnsSelector = new ColumnsSelector({el: this.el});
+    this.dataTable = new DataTable({el: this.el});
+    this.loader = new Loader({el: this.el});
+    this._renderColumnsSelectors = this._renderColumnsSelectors.bind(this);
+    this._renderTable = this._renderTable.bind(this);
+    this.requestButton.setOnClickHandler(this._renderColumnsSelectors);
+    this.columnsSelector.setOnSelectHandler(this._renderTable);
+    this.dataTable.setOnBackHandler(this._renderColumnsSelectors);
+  }
+  
+  renderRequestButton() {
+    this.requestButton.render();
+  }
+  
+  renderLoading() {
+    this.loader.render();
+  }
+  
+  _renderColumnsSelectors() {
+    this.renderLoading();
+    this.dataProvider.getColumns(columns => this.columnsSelector.render(columns));
+  }
+  
+  _renderTable(chosenColumns) {
+    this.renderLoading();
+    this.dataProvider.getData( data => this.dataTable.render(chosenColumns, data));
+  }
+  
 }
+
 window.App = App;
