@@ -2,7 +2,7 @@ class App {
   constructor({el}) {
     this.el = el;
     this.requestButton = new RequestButton({el: this.el});
-    this.dataProvider = new DataProvider({path: 'http://www.json-generator.com/api/json/get/bUsRkvEmHm?indent=2'});
+    this.dataProvider = new DataProvider({path: 'data.json'});
     this.columnsSelector = new ColumnsSelector({el: this.el});
     this.dataTable = new DataTable({el: this.el});
     this.loader = new Loader({el: this.el});

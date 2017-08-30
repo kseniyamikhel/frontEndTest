@@ -4,7 +4,7 @@ class Loader{
   }
   render(){
     this.el.innerHTML = `
-      <div id='loader'><img src="../img/ajax-loader.gif" /></div>
+      <div id='loader'><img src='img/ajax-loader.gif' /></div>
     `;
   }
 }
